@@ -27,6 +27,9 @@ firebase-debug.log
 firestore-debug.log
 ui-debug.log
 
+# Firebase Functions
+functions/node_modules/
+
 # Dart/Flutter generated
 *.g.dart
 *.freezed.dart

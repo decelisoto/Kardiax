@@ -71,7 +71,7 @@ class _DebugScreenState extends State<DebugScreen> {
             const Text(
               'Debug Panel',
               style: TextStyle(
-                fontFamily: 'Rajdhani',
+                fontFamily: 'Oswald',
                 color: KardiaxColors.textPrimary,
                 fontSize: 18,
                 fontWeight: FontWeight.w700,
@@ -88,7 +88,7 @@ class _DebugScreenState extends State<DebugScreen> {
               child: const Text(
                 'DEV ONLY',
                 style: TextStyle(
-                  fontFamily: 'Rajdhani',
+                  fontFamily: 'Oswald',
                   color: KardiaxColors.amber,
                   fontSize: 10,
                   fontWeight: FontWeight.w700,
@@ -185,7 +185,7 @@ class _DebugScreenState extends State<DebugScreen> {
                     child: Text(
                       e.key,
                       style: TextStyle(
-                        fontFamily: 'Rajdhani',
+                        fontFamily: 'Oswald',
                         color: selected
                             ? (isAbnormal
                                   ? KardiaxColors.red
@@ -224,7 +224,7 @@ class _DebugScreenState extends State<DebugScreen> {
                 Text(
                   '30',
                   style: TextStyle(
-                    fontFamily: 'Rajdhani',
+                    fontFamily: 'Oswald',
                     color: KardiaxColors.textSecondary,
                     fontSize: 11,
                   ),
@@ -232,7 +232,7 @@ class _DebugScreenState extends State<DebugScreen> {
                 Text(
                   'Bradycardia  |  Normal  |  Tachycardia',
                   style: TextStyle(
-                    fontFamily: 'Rajdhani',
+                    fontFamily: 'Oswald',
                     color: KardiaxColors.textSecondary,
                     fontSize: 11,
                   ),
@@ -240,7 +240,7 @@ class _DebugScreenState extends State<DebugScreen> {
                 Text(
                   '180',
                   style: TextStyle(
-                    fontFamily: 'Rajdhani',
+                    fontFamily: 'Oswald',
                     color: KardiaxColors.textSecondary,
                     fontSize: 11,
                   ),
@@ -315,7 +315,7 @@ class _DebugScreenState extends State<DebugScreen> {
                   Text(
                     widget.currentStatus.name.toUpperCase(),
                     style: const TextStyle(
-                      fontFamily: 'Rajdhani',
+                      fontFamily: 'Oswald',
                       color: KardiaxColors.textSecondary,
                       fontSize: 13,
                       letterSpacing: 1,
@@ -407,7 +407,7 @@ class _DebugScreenState extends State<DebugScreen> {
   void _showToast(String msg) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text(msg, style: const TextStyle(fontFamily: 'Rajdhani')),
+        content: Text(msg, style: const TextStyle(fontFamily: 'Oswald')),
         backgroundColor: KardiaxColors.card,
         behavior: SnackBarBehavior.floating,
         duration: const Duration(seconds: 2),
@@ -428,7 +428,7 @@ class _SectionHeader extends StatelessWidget {
     return Text(
       text,
       style: const TextStyle(
-        fontFamily: 'Rajdhani',
+        fontFamily: 'Oswald',
         color: KardiaxColors.textSecondary,
         fontSize: 11,
         fontWeight: FontWeight.w600,
@@ -471,7 +471,7 @@ class _DebugButton extends StatelessWidget {
               child: Text(
                 label,
                 style: TextStyle(
-                  fontFamily: 'Rajdhani',
+                  fontFamily: 'Oswald',
                   color: color,
                   fontSize: 13,
                   fontWeight: FontWeight.w600,

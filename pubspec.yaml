@@ -35,7 +35,7 @@ dependencies:
   firebase_auth: ^5.0.0
   cloud_firestore: ^5.0.0
   firebase_messaging: ^15.0.0
-
+  cloud_functions: ^5.1.4
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -44,6 +44,14 @@ dependencies:
   fl_chart: ^1.1.1
   permission_handler: ^12.0.1
   provider: ^6.1.5+1
+  connectivity_plus: ^6.0.5
+  shared_preferences: ^2.3.5
+  uuid: ^4.5.1
+  url_launcher: ^6.3.1
+  pdf: ^3.10.8
+  path_provider: ^2.1.2
+  share_plus: ^7.2.1
+  csv: ^6.0.0
 
 dev_dependencies:
   flutter_test:
@@ -68,13 +76,13 @@ flutter:
   uses-material-design: true
 
   fonts:
-    - family: Rajdhani
+    - family: Oswald
       fonts:
-        - asset: assets/fonts/Rajdhani/Rajdhani-Regular.ttf
+        - asset: assets/fonts/Oswald/Oswald-Regular.ttf
           weight: 400
-        - asset: assets/fonts/Rajdhani/Rajdhani-SemiBold.ttf
+        - asset: assets/fonts/Oswald/Oswald-SemiBold.ttf
           weight: 600
-        - asset: assets/fonts/Rajdhani/Rajdhani-Bold.ttf
+        - asset: assets/fonts/Oswald/Oswald-Bold.ttf
           weight: 700
 
   # To add assets to your application, add an assets section, like this:

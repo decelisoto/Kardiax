@@ -45,21 +45,21 @@ class KardiaxTheme {
     drawerTheme: const DrawerThemeData(backgroundColor: KardiaxColors.surface),
     textTheme: const TextTheme(
       displayLarge: TextStyle(
-        fontFamily: 'Rajdhani',
+        fontFamily: 'Oswald',
         color: KardiaxColors.textPrimary,
         fontWeight: FontWeight.w700,
       ),
       headlineMedium: TextStyle(
-        fontFamily: 'Rajdhani',
+        fontFamily: 'Oswald',
         color: KardiaxColors.textPrimary,
         fontWeight: FontWeight.w600,
       ),
       bodyLarge: TextStyle(
-        fontFamily: 'Rajdhani',
+        fontFamily: 'Oswald',
         color: KardiaxColors.textPrimary,
       ),
       bodyMedium: TextStyle(
-        fontFamily: 'Rajdhani',
+        fontFamily: 'Oswald',
         color: KardiaxColors.textSecondary,
       ),
     ),

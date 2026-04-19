@@ -82,7 +82,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 const Text(
                   'Reset password',
                   style: TextStyle(
-                    fontFamily: 'Rajdhani',
+                    fontFamily: 'Oswald',
                     color: KardiaxColors.textPrimary,
                     fontSize: 28,
                     fontWeight: FontWeight.w700,
@@ -93,7 +93,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 const Text(
                   "Enter your email and we'll send you a reset link.",
                   style: TextStyle(
-                    fontFamily: 'Rajdhani',
+                    fontFamily: 'Oswald',
                     color: KardiaxColors.textSecondary,
                     fontSize: 14,
                   ),
@@ -105,7 +105,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   const Text(
                     'EMAIL',
                     style: TextStyle(
-                      fontFamily: 'Rajdhani',
+                      fontFamily: 'Oswald',
                       color: KardiaxColors.textSecondary,
                       fontSize: 11,
                       fontWeight: FontWeight.w600,
@@ -117,14 +117,14 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     controller: _emailController,
                     keyboardType: TextInputType.emailAddress,
                     style: const TextStyle(
-                      fontFamily: 'Rajdhani',
+                      fontFamily: 'Oswald',
                       color: KardiaxColors.textPrimary,
                       fontSize: 15,
                     ),
                     decoration: InputDecoration(
                       hintText: 'you@example.com',
                       hintStyle: const TextStyle(
-                        fontFamily: 'Rajdhani',
+                        fontFamily: 'Oswald',
                         color: KardiaxColors.textHint,
                       ),
                       prefixIcon: const Icon(
@@ -176,7 +176,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                           Text(
                             _errorMessage!,
                             style: const TextStyle(
-                              fontFamily: 'Rajdhani',
+                              fontFamily: 'Oswald',
                               color: KardiaxColors.red,
                               fontSize: 13,
                             ),
@@ -211,7 +211,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                           : const Text(
                               'SEND RESET LINK',
                               style: TextStyle(
-                                fontFamily: 'Rajdhani',
+                                fontFamily: 'Oswald',
                                 fontSize: 15,
                                 fontWeight: FontWeight.w700,
                                 letterSpacing: 2,
@@ -246,7 +246,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                               const Text(
                                 'Check your email',
                                 style: TextStyle(
-                                  fontFamily: 'Rajdhani',
+                                  fontFamily: 'Oswald',
                                   color: KardiaxColors.green,
                                   fontSize: 15,
                                   fontWeight: FontWeight.w700,
@@ -256,7 +256,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                               Text(
                                 'Reset link sent to ${_emailController.text}',
                                 style: const TextStyle(
-                                  fontFamily: 'Rajdhani',
+                                  fontFamily: 'Oswald',
                                   color: KardiaxColors.textSecondary,
                                   fontSize: 13,
                                 ),
@@ -285,7 +285,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                       child: const Text(
                         'BACK TO SIGN IN',
                         style: TextStyle(
-                          fontFamily: 'Rajdhani',
+                          fontFamily: 'Oswald',
                           fontSize: 15,
                           fontWeight: FontWeight.w700,
                           letterSpacing: 2,

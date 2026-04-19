@@ -118,7 +118,7 @@ class _LoginScreenState extends State<LoginScreen>
                           TextSpan(
                             text: 'Kardia',
                             style: TextStyle(
-                              fontFamily: 'Rajdhani',
+                              fontFamily: 'Oswald',
                               fontSize: 38,
                               fontWeight: FontWeight.w700,
                               color: KardiaxColors.textPrimary,
@@ -128,7 +128,7 @@ class _LoginScreenState extends State<LoginScreen>
                           TextSpan(
                             text: 'x',
                             style: TextStyle(
-                              fontFamily: 'Rajdhani',
+                              fontFamily: 'Oswald',
                               fontSize: 38,
                               fontWeight: FontWeight.w700,
                               color: KardiaxColors.red,
@@ -142,7 +142,7 @@ class _LoginScreenState extends State<LoginScreen>
                     const Text(
                       'Cardiac monitoring, redefined.',
                       style: TextStyle(
-                        fontFamily: 'Rajdhani',
+                        fontFamily: 'Oswald',
                         color: KardiaxColors.textSecondary,
                         fontSize: 14,
                         letterSpacing: 0.5,
@@ -155,7 +155,7 @@ class _LoginScreenState extends State<LoginScreen>
                     const Text(
                       'Welcome back',
                       style: TextStyle(
-                        fontFamily: 'Rajdhani',
+                        fontFamily: 'Oswald',
                         color: KardiaxColors.textPrimary,
                         fontSize: 24,
                         fontWeight: FontWeight.w700,
@@ -166,7 +166,7 @@ class _LoginScreenState extends State<LoginScreen>
                     const Text(
                       'Sign in to continue monitoring',
                       style: TextStyle(
-                        fontFamily: 'Rajdhani',
+                        fontFamily: 'Oswald',
                         color: KardiaxColors.textSecondary,
                         fontSize: 13,
                       ),
@@ -181,7 +181,7 @@ class _LoginScreenState extends State<LoginScreen>
                       controller: _emailController,
                       keyboardType: TextInputType.emailAddress,
                       style: const TextStyle(
-                        fontFamily: 'Rajdhani',
+                        fontFamily: 'Oswald',
                         color: KardiaxColors.textPrimary,
                         fontSize: 15,
                       ),
@@ -205,7 +205,7 @@ class _LoginScreenState extends State<LoginScreen>
                       controller: _passwordController,
                       obscureText: _obscurePassword,
                       style: const TextStyle(
-                        fontFamily: 'Rajdhani',
+                        fontFamily: 'Oswald',
                         color: KardiaxColors.textPrimary,
                         fontSize: 15,
                       ),
@@ -254,7 +254,7 @@ class _LoginScreenState extends State<LoginScreen>
                         child: const Text(
                           'Forgot password?',
                           style: TextStyle(
-                            fontFamily: 'Rajdhani',
+                            fontFamily: 'Oswald',
                             fontSize: 13,
                             letterSpacing: 0.3,
                           ),
@@ -288,7 +288,7 @@ class _LoginScreenState extends State<LoginScreen>
                             Text(
                               _errorMessage!,
                               style: const TextStyle(
-                                fontFamily: 'Rajdhani',
+                                fontFamily: 'Oswald',
                                 color: KardiaxColors.red,
                                 fontSize: 13,
                               ),
@@ -328,7 +328,7 @@ class _LoginScreenState extends State<LoginScreen>
                             : const Text(
                                 'SIGN IN',
                                 style: TextStyle(
-                                  fontFamily: 'Rajdhani',
+                                  fontFamily: 'Oswald',
                                   fontSize: 15,
                                   fontWeight: FontWeight.w700,
                                   letterSpacing: 2,
@@ -346,7 +346,7 @@ class _LoginScreenState extends State<LoginScreen>
                         const Text(
                           "Don't have an account? ",
                           style: TextStyle(
-                            fontFamily: 'Rajdhani',
+                            fontFamily: 'Oswald',
                             color: KardiaxColors.textSecondary,
                             fontSize: 13,
                           ),
@@ -360,7 +360,7 @@ class _LoginScreenState extends State<LoginScreen>
                           child: const Text(
                             'Sign up',
                             style: TextStyle(
-                              fontFamily: 'Rajdhani',
+                              fontFamily: 'Oswald',
                               color: KardiaxColors.red,
                               fontSize: 13,
                               fontWeight: FontWeight.w700,
@@ -385,7 +385,7 @@ class _LoginScreenState extends State<LoginScreen>
     return InputDecoration(
       hintText: hint,
       hintStyle: const TextStyle(
-        fontFamily: 'Rajdhani',
+        fontFamily: 'Oswald',
         color: KardiaxColors.textHint,
         fontSize: 14,
       ),
@@ -414,7 +414,7 @@ class _LoginScreenState extends State<LoginScreen>
         borderSide: const BorderSide(color: KardiaxColors.red, width: 1.5),
       ),
       errorStyle: const TextStyle(
-        fontFamily: 'Rajdhani',
+        fontFamily: 'Oswald',
         color: KardiaxColors.red,
         fontSize: 12,
       ),
@@ -432,7 +432,7 @@ class _FieldLabel extends StatelessWidget {
     return Text(
       text,
       style: const TextStyle(
-        fontFamily: 'Rajdhani',
+        fontFamily: 'Oswald',
         color: KardiaxColors.textSecondary,
         fontSize: 11,
         fontWeight: FontWeight.w600,

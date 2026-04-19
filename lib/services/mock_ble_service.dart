@@ -18,25 +18,36 @@ class MockBleService implements BleService {
   static const int _normalSamples = 240 * 8;     // 8s normal       @ 240 Hz effective
   static const int _arrhythmiaSamples = 240 * 5; // 5s arrhythmia  @ 240 Hz effective
 
+  BleStatus _currentStatus = BleStatus.disconnected;
+
   @override
   Stream<List<int>> get ecgStream => _ecgController.stream;
   @override
   Stream<BleStatus> get statusStream => _statusController.stream;
+  @override
+  BleStatus get currentStatus => _currentStatus;
+
+  void _emitStatus(BleStatus s) {
+    _currentStatus = s;
+    if (!_statusController.isClosed) {
+      _statusController.add(s);
+    }
+  }
 
   @override
   Future<void> connect() async {
-    _statusController.add(BleStatus.scanning);
+    _emitStatus(BleStatus.scanning);
     await Future.delayed(const Duration(milliseconds: 800));
-    _statusController.add(BleStatus.connecting);
+    _emitStatus(BleStatus.connecting);
     await Future.delayed(const Duration(milliseconds: 600));
-    _statusController.add(BleStatus.connected);
+    _emitStatus(BleStatus.connected);
     _startStreaming();
   }
 
   @override
   Future<void> disconnect() async {
     _dataTimer?.cancel();
-    _statusController.add(BleStatus.disconnected);
+    _emitStatus(BleStatus.disconnected);
   }
 
   void _startStreaming() {

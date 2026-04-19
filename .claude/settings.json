@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(flutter analyze *)",
+      "Bash(curl -sL \"https://github.com/google/fonts/raw/main/ofl/oswald/Oswald%5Bwght%5D.ttf\" -o /tmp/oswald_check.ttf)",
+      "Read(//tmp/**)",
+      "Bash(curl -sL \"https://github.com/google/fonts/raw/main/ofl/oswald/static/Oswald-Regular.ttf\" -o /Users/decelisoto/Kardiax/assets/fonts/Oswald/Oswald-Regular.ttf)",
+      "Bash(curl -sL \"https://github.com/google/fonts/raw/main/ofl/oswald/static/Oswald-SemiBold.ttf\" -o /Users/decelisoto/Kardiax/assets/fonts/Oswald/Oswald-SemiBold.ttf)",
+      "Bash(curl -sL \"https://github.com/google/fonts/raw/main/ofl/oswald/static/Oswald-Bold.ttf\" -o /Users/decelisoto/Kardiax/assets/fonts/Oswald/Oswald-Bold.ttf)",
+      "Bash(find /Users/decelisoto/Kardiax/lib -name \"*.dart\" -exec sed -i '' \"s/'Rajdhani'/'Oswald'/g\" {} +)",
+      "Bash(git -C /Users/decelisoto/Kardiax check-ignore -v functions/node_modules)",
+      "Bash(git -C /Users/decelisoto/Kardiax status --short functions/)"
+    ]
+  }
+}

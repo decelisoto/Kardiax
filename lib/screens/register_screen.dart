@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import '../services/user_profile_service.dart';
 import '../theme.dart';
 import 'ecg_dashboard.dart';
 
@@ -31,19 +32,31 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   Future<void> _register() async {
     if (!_formKey.currentState!.validate()) return;
-    setState(() => _isLoading = true);
+    setState(() { _isLoading = true; _errorMessage = null; });
 
     try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      final cred = await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: _emailController.text.trim(),
         password: _passwordController.text.trim(),
+      );
+
+      final user = cred.user!;
+      final displayName = _nameController.text.trim();
+
+      // Set display name on the Firebase Auth profile.
+      await user.updateDisplayName(displayName);
+
+      await UserProfileService.createProfile(
+        uid: user.uid,
+        displayName: displayName,
+        email: user.email!,
       );
 
       if (!mounted) return;
       Navigator.of(context).pushReplacement(
         PageRouteBuilder(
-          pageBuilder: (_, __, ___) => const EcgDashboard(),
-          transitionsBuilder: (_, anim, __, child) =>
+          pageBuilder: (_, _, _) => const EcgDashboard(),
+          transitionsBuilder: (_, anim, _, child) =>
               FadeTransition(opacity: anim, child: child),
           transitionDuration: const Duration(milliseconds: 400),
         ),
@@ -57,8 +70,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
           _                      => 'Registration failed. Please try again.',
         };
       });
+    } catch (e) {
+      setState(() => _errorMessage = 'Registration failed. Please try again.');
     } finally {
-      setState(() => _isLoading = false);
+      if (mounted) setState(() => _isLoading = false);
     }
   }
 
@@ -72,11 +87,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
       appBar: AppBar(
         backgroundColor: KardiaxColors.black,
         leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back_ios,
-            color: KardiaxColors.textPrimary,
-            size: 18,
-          ),
+          icon: const Icon(Icons.arrow_back_ios,
+              color: KardiaxColors.textPrimary, size: 18),
           onPressed: () => Navigator.pop(context),
         ),
         elevation: 0,
@@ -95,7 +107,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 const Text(
                   'Create account',
                   style: TextStyle(
-                    fontFamily: 'Rajdhani',
+                    fontFamily: 'Oswald',
                     color: KardiaxColors.textPrimary,
                     fontSize: 28,
                     fontWeight: FontWeight.w700,
@@ -106,7 +118,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 const Text(
                   'Join Kardiax to start monitoring',
                   style: TextStyle(
-                    fontFamily: 'Rajdhani',
+                    fontFamily: 'Oswald',
                     color: KardiaxColors.textSecondary,
                     fontSize: 13,
                   ),
@@ -126,6 +138,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
 
                 const SizedBox(height: 18),
+
 
                 _FieldLabel('EMAIL'),
                 const SizedBox(height: 6),
@@ -150,34 +163,60 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   controller: _passwordController,
                   obscureText: _obscurePassword,
                   style: const TextStyle(
-                    fontFamily: 'Rajdhani',
+                    fontFamily: 'Oswald',
                     color: KardiaxColors.textPrimary,
                     fontSize: 15,
                   ),
-                  decoration:
-                      _inputDecoration(
-                        'Min. 6 characters',
-                        Icons.lock_outline,
-                      ).copyWith(
-                        suffixIcon: GestureDetector(
-                          onTap: () => setState(
-                            () => _obscurePassword = !_obscurePassword,
-                          ),
-                          child: Icon(
-                            _obscurePassword
-                                ? Icons.visibility_off_outlined
-                                : Icons.visibility_outlined,
-                            color: KardiaxColors.gray,
-                            size: 18,
-                          ),
-                        ),
+                  decoration: _inputDecoration(
+                    'Min. 6 characters',
+                    Icons.lock_outline,
+                  ).copyWith(
+                    suffixIcon: GestureDetector(
+                      onTap: () =>
+                          setState(() => _obscurePassword = !_obscurePassword),
+                      child: Icon(
+                        _obscurePassword
+                            ? Icons.visibility_off_outlined
+                            : Icons.visibility_outlined,
+                        color: KardiaxColors.gray,
+                        size: 18,
                       ),
+                    ),
+                  ),
                   validator: (v) {
                     if (v == null || v.isEmpty) return 'Enter a password';
                     if (v.length < 6) return 'Min. 6 characters';
                     return null;
                   },
                 ),
+
+                if (_errorMessage != null) ...[
+                  const SizedBox(height: 16),
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 12, vertical: 10),
+                    decoration: BoxDecoration(
+                      color: KardiaxColors.red.withValues(alpha: 0.08),
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(
+                          color: KardiaxColors.red.withValues(alpha: 0.3)),
+                    ),
+                    child: Row(children: [
+                      const Icon(Icons.error_outline,
+                          color: KardiaxColors.red, size: 14),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: Text(
+                          _errorMessage!,
+                          style: const TextStyle(
+                              fontFamily: 'Oswald',
+                              color: KardiaxColors.red,
+                              fontSize: 13),
+                        ),
+                      ),
+                    ]),
+                  ),
+                ],
 
                 SizedBox(height: isSmall ? 24 : 36),
 
@@ -189,12 +228,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: KardiaxColors.red,
                       foregroundColor: Colors.white,
-                      disabledBackgroundColor: KardiaxColors.red.withOpacity(
-                        0.4,
-                      ),
+                      disabledBackgroundColor:
+                          KardiaxColors.red.withValues(alpha: 0.4),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(14),
-                      ),
+                          borderRadius: BorderRadius.circular(14)),
                       elevation: 0,
                     ),
                     child: _isLoading
@@ -202,14 +239,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             width: 20,
                             height: 20,
                             child: CircularProgressIndicator(
-                              color: Colors.white,
-                              strokeWidth: 2,
-                            ),
-                          )
+                                color: Colors.white, strokeWidth: 2))
                         : const Text(
                             'CREATE ACCOUNT',
                             style: TextStyle(
-                              fontFamily: 'Rajdhani',
+                              fontFamily: 'Oswald',
                               fontSize: 15,
                               fontWeight: FontWeight.w700,
                               letterSpacing: 2,
@@ -226,21 +260,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     const Text(
                       'Already have an account? ',
                       style: TextStyle(
-                        fontFamily: 'Rajdhani',
-                        color: KardiaxColors.textSecondary,
-                        fontSize: 13,
-                      ),
+                          fontFamily: 'Oswald',
+                          color: KardiaxColors.textSecondary,
+                          fontSize: 13),
                     ),
                     GestureDetector(
                       onTap: () => Navigator.pop(context),
                       child: const Text(
                         'Sign in',
                         style: TextStyle(
-                          fontFamily: 'Rajdhani',
-                          color: KardiaxColors.red,
-                          fontSize: 13,
-                          fontWeight: FontWeight.w700,
-                        ),
+                            fontFamily: 'Oswald',
+                            color: KardiaxColors.red,
+                            fontSize: 13,
+                            fontWeight: FontWeight.w700),
                       ),
                     ),
                   ],
@@ -266,10 +298,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
       obscureText: obscure,
       keyboardType: keyboardType,
       style: const TextStyle(
-        fontFamily: 'Rajdhani',
-        color: KardiaxColors.textPrimary,
-        fontSize: 15,
-      ),
+          fontFamily: 'Oswald',
+          color: KardiaxColors.textPrimary,
+          fontSize: 15),
       decoration: _inputDecoration(hint, icon),
       validator: validator,
     );
@@ -279,39 +310,34 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return InputDecoration(
       hintText: hint,
       hintStyle: const TextStyle(
-        fontFamily: 'Rajdhani',
-        color: KardiaxColors.textHint,
-        fontSize: 14,
-      ),
+          fontFamily: 'Oswald', color: KardiaxColors.textHint, fontSize: 14),
       prefixIcon: Icon(icon, color: KardiaxColors.gray, size: 18),
       filled: true,
       fillColor: KardiaxColors.card,
-      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+      contentPadding:
+          const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
       border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12),
-        borderSide: BorderSide(color: KardiaxColors.gray.withOpacity(0.3)),
-      ),
+          borderRadius: BorderRadius.circular(12),
+          borderSide:
+              BorderSide(color: KardiaxColors.gray.withValues(alpha: 0.3))),
       enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12),
-        borderSide: BorderSide(color: KardiaxColors.gray.withOpacity(0.2)),
-      ),
+          borderRadius: BorderRadius.circular(12),
+          borderSide:
+              BorderSide(color: KardiaxColors.gray.withValues(alpha: 0.2))),
       focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12),
-        borderSide: const BorderSide(color: KardiaxColors.red, width: 1.5),
-      ),
+          borderRadius: BorderRadius.circular(12),
+          borderSide:
+              const BorderSide(color: KardiaxColors.red, width: 1.5)),
       errorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12),
-        borderSide: BorderSide(color: KardiaxColors.red.withOpacity(0.5)),
-      ),
+          borderRadius: BorderRadius.circular(12),
+          borderSide:
+              BorderSide(color: KardiaxColors.red.withValues(alpha: 0.5))),
       focusedErrorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12),
-        borderSide: const BorderSide(color: KardiaxColors.red, width: 1.5),
-      ),
+          borderRadius: BorderRadius.circular(12),
+          borderSide:
+              const BorderSide(color: KardiaxColors.red, width: 1.5)),
       errorStyle: const TextStyle(
-        fontFamily: 'Rajdhani',
-        color: KardiaxColors.red,
-        fontSize: 12,
-      ),
+          fontFamily: 'Oswald', color: KardiaxColors.red, fontSize: 12),
     );
   }
 }
@@ -325,12 +351,11 @@ class _FieldLabel extends StatelessWidget {
     return Text(
       text,
       style: const TextStyle(
-        fontFamily: 'Rajdhani',
-        color: KardiaxColors.textSecondary,
-        fontSize: 11,
-        fontWeight: FontWeight.w600,
-        letterSpacing: 1.5,
-      ),
+          fontFamily: 'Oswald',
+          color: KardiaxColors.textSecondary,
+          fontSize: 11,
+          fontWeight: FontWeight.w600,
+          letterSpacing: 1.5),
     );
   }
 }
